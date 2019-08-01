@@ -9,6 +9,7 @@ import ListAdder from "../ListAdder/ListAdder";
 import Header from "../Header/Header";
 import BoardTitle from "../BoardTitle/BoardTitle";
 import "./Board.scss";
+import { filteredList } from "./../utils";
 
 class Board extends Component {
   static propTypes = {
@@ -154,7 +155,7 @@ class Board extends Component {
               >
                 {provided => (
                   <div className="lists" ref={provided.innerRef}>
-                    {lists.map((list, index) => (
+                    {filteredList(lists, "priority").map((list, index) => (
                       <List
                         list={list}
                         boardId={boardId}

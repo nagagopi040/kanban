@@ -35,9 +35,10 @@ class Home extends Component {
                 <Link
                   key={board._id}
                   className={classnames("board-link", board.color)}
-                  to={`/b/${board._id}/${slugify(board.title, {
-                    lower: true
-                  })}`}
+                  to={{
+                    path: `/b/${board._id}/${slugify(board.title, { lower: true })}`,
+                    state: { boardId : board._id}
+                  }}
                 >
                   <div className="board-link-title">{board.title}</div>
                   <div className="mini-board">
