@@ -36,8 +36,8 @@ class Home extends Component {
                   key={board._id}
                   className={classnames("board-link", board.color)}
                   to={{
-                    path: `/b/${board._id}/${slugify(board.title, { lower: true })}`,
-                    state: { boardId : board._id}
+                    pathname: `/b/${board._id}/${slugify(board.title, {lower: true})}`,
+                    state: { boardId: board._id }
                   }}
                 >
                   <div className="board-link-title">{board.title}</div>

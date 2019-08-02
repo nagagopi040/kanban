@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import classnames from "classnames";
+
 import CardModal from "../CardModal/CardModal";
-import CardBadges from "../CardBadges/CardBadges";
-import { findCheckboxes } from "../utils";
 import formatMarkdown from "./formatMarkdown";
 import "./Card.scss";
 
@@ -48,14 +47,6 @@ class Card extends Component {
     }
   };
 
-  handleKeyDown = event => {
-    // Only open card on enter since spacebar is used by react-beautiful-dnd for keyboard dragging
-    if (event.keyCode === 13 && event.target.tagName.toLowerCase() !== "a") {
-      event.preventDefault();
-      this.toggleCardEditor();
-    }
-  };
-
   // identify the clicked checkbox by its index and give it a new checked attribute
   toggleCheckbox = (checked, i) => {
     const { card, dispatch } = this.props;
@@ -81,12 +72,11 @@ class Card extends Component {
   render() {
     const { card, index, listId, isDraggingOver } = this.props;
     const { isModalOpen } = this.state;
-    const checkboxes = findCheckboxes(card._id);
     return (
       <>
         <Draggable draggableId={card._id} index={index}>
           {(provided, snapshot) => (
-            <>
+            <div className="card">
               {/* eslint-disable */}
               <div
                 className={classnames("card-title", {
@@ -117,14 +107,10 @@ class Card extends Component {
                     __html: formatMarkdown(card.name)
                   }}
                 />
-                {/* eslint-enable */}
-                {(card.date || checkboxes.total > 0) && (
-                  <CardBadges date={card.date} checkboxes={checkboxes} />
-                )}
               </div>
               {/* Remove placeholder when not dragging over to reduce snapping */}
               {isDraggingOver && provided.placeholder}
-            </>
+            </div>
           )}
         </Draggable>
         <CardModal

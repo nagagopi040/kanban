@@ -2,11 +2,12 @@ const cardsById = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CARD": {
       const { cardText, cardId } = action.payload;
-      return { ...state, [cardId]: { name: cardText, _id: cardId } };
+      return { ...state, [cardId]: { name: cardText, _id: cardId, opened_at: new Date().toISOString() } };
     }
-    case "CHANGE_CARD_TEXT": {
-      const { cardText, cardId } = action.payload;
-      return { ...state, [cardId]: { ...state[cardId], name: cardText } };
+    case "CHANGE_CARD_CONTENT": {
+      const { newContent, cardId } = action.payload;
+      console.log(cardId, state[cardId], { ...state[cardId], ...newContent });
+      return { ...state, [cardId]: { ...state[cardId], ...newContent } };
     }
     case "CHANGE_CARD_DATE": {
       const { date, cardId } = action.payload;

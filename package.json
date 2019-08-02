@@ -39,6 +39,7 @@
     "react-beautiful-dnd": "github:yogaboll/react-beautiful-dnd#include-generated",
     "react-day-picker": "^7.1.9",
     "react-dom": "^16.2.0",
+    "react-dropdown-select": "^3.3.2",
     "react-head": "^2.1.0",
     "react-icons": "^2.2.7",
     "react-modal": "^3.4.4",

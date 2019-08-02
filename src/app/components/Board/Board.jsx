@@ -8,8 +8,8 @@ import List from "../List/List";
 import ListAdder from "../ListAdder/ListAdder";
 import Header from "../Header/Header";
 import BoardTitle from "../BoardTitle/BoardTitle";
+import BoardMenu from "../BoardMenu/BoardMenu";
 import "./Board.scss";
-import { filteredList } from "./../utils";
 
 class Board extends Component {
   static propTypes = {
@@ -140,6 +140,7 @@ class Board extends Component {
           <Title>{boardTitle} | React Kanban</Title>
           <Header />
           <BoardTitle />
+          <BoardMenu />
           {/* eslint-disable jsx-a11y/no-static-element-interactions */}
           <div
             className="lists-wrapper"
@@ -155,7 +156,7 @@ class Board extends Component {
               >
                 {provided => (
                   <div className="lists" ref={provided.innerRef}>
-                    {filteredList(lists, "priority").map((list, index) => (
+                    {lists.map((list, index) => (
                       <List
                         list={list}
                         boardId={boardId}

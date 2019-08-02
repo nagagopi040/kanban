@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Textarea from "react-textarea-autosize";
 import Modal from "react-modal";
-import CardBadges from "../CardBadges/CardBadges";
-import { findCheckboxes } from "../utils";
+import Select from "react-dropdown-select";
+
+import { CONSTANTS } from "./../utils";
 import "./CardModal.scss";
 
 class CardModal extends Component {
@@ -31,9 +32,7 @@ class CardModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newText: props.card.name,
-      isColorPickerOpen: false,
-      isTextareaFocused: true
+      newCard: props.card
     };
     if (typeof document !== "undefined") {
       Modal.setAppElement("#app");
@@ -41,40 +40,42 @@ class CardModal extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    this.setState({ newText: nextProps.card.name });
+    this.setState({ newCard : nextProps.card });
   };
 
-  handleKeyDown = event => {
+  handleKeyDown = (event, key) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
       event.preventDefault();
-      this.submitCard();
+      this.submitCard(key);
     }
   };
 
-  submitCard = () => {
-    const { newText } = this.state;
-    const { card, listId, dispatch, toggleCardEditor } = this.props;
-    if (newText === "") {
+  submitCard = (key) => {
+    const { newCard } = this.state;
+    const { card, listId, dispatch } = this.props;
+    if (newCard[key] === "") {
       this.deleteCard();
-    } else if (newText !== card.name) {
+    } else if (newCard[key] !== card[key]) {
       dispatch({
-        type: "CHANGE_CARD_TEXT",
+        type: "CHANGE_CARD_CONTENT",
         payload: {
-          cardText: newText,
+          ...newCard,
           cardId: card._id,
-          listId
+          listId,
+          newContent: {[key]: newCard[key]}
         }
       });
     }
-    toggleCardEditor();
   };
 
-  handleChange = event => {
-    this.setState({ newText: event.target.value });
-  };
-
-  toggleColorPicker = () => {
-    this.setState({ isColorPickerOpen: !this.state.isColorPickerOpen });
+  handleChange = (event, key) => {
+    const { value } = event.target;
+    this.setState((prevState) => ({
+      newCard: {
+        ...prevState.newCard,
+        [key]: value
+      }
+    }));
   };
 
   handleRequestClose = () => {
@@ -85,57 +86,30 @@ class CardModal extends Component {
     }
   };
 
+  onChange = (value, key) => {
+    const { newCard } = this.state;
+    const { card, listId, dispatch } = this.props;
+    if(value.length && value[0].value !== newCard[key]){
+      dispatch({
+        type: "CHANGE_CARD_CONTENT",
+        payload: {
+          ...newCard,
+          cardId: card._id,
+          listId,
+          newContent: {[key]:  value[0].value}
+        }
+      });
+    }
+  }
+
   render() {
-    const { newText, isColorPickerOpen, isTextareaFocused } = this.state;
-    const { cardElement, card, listId, isOpen } = this.props;
+    const { newCard } = this.state;
+    const { cardElement, isOpen } = this.props;
     if (!cardElement) {
       return null;
     }
 
-    // Get number of checked and total checkboxes
-    const checkboxes = findCheckboxes(newText);
-
-    /*
-    Create style of modal in order to not clip outside the edges no matter what device.
-    */
-
-    // Get dimensions of the card to calculate dimensions of cardModal.
-    const boundingRect = cardElement.getBoundingClientRect();
-
-    // Returns true if card is closer to right border than to the left
-    const isCardNearRightBorder =
-      window.innerWidth - boundingRect.right < boundingRect.left;
-
-    // Check if the display is so thin that we need to trigger a centered, vertical layout
-    // DO NOT CHANGE the number 550 without also changing related media-query in CardOptions.scss
-    const isThinDisplay = window.innerWidth < 550;
-
-    // Position textarea at the same place as the card and position everything else away from closest edge
-    const style = {
-      content: {
-        top: Math.min(
-          boundingRect.top,
-          window.innerHeight - boundingRect.height - 18
-        ),
-        left: isCardNearRightBorder ? null : boundingRect.left,
-        right: isCardNearRightBorder
-          ? window.innerWidth - boundingRect.right
-          : null,
-        flexDirection: isCardNearRightBorder ? "row-reverse" : "row"
-      }
-    };
-
-    // For layouts that are less wide than 550px, let the modal take up the entire width at the top of the screen
-    const mobileStyle = {
-      content: {
-        flexDirection: "column",
-        top: 3,
-        left: 3,
-        right: 3
-      }
-    };
-
-    return (
+    return (        
       <Modal
         closeTimeoutMS={150}
         isOpen={isOpen}
@@ -143,45 +117,86 @@ class CardModal extends Component {
         contentLabel="Card editor"
         overlayClassName="modal-underlay"
         className="modal"
-        style={isThinDisplay ? mobileStyle : style}
         includeDefaultStyles={false}
         onClick={this.handleRequestClose}
       >
-        <div
-          className="modal-textarea-wrapper"
-          style={{
-            minHeight: isThinDisplay ? "none" : boundingRect.height,
-            width: isThinDisplay ? "100%" : boundingRect.width,
-            boxShadow: isTextareaFocused
-              ? "0px 0px 3px 2px rgb(0, 180, 255)"
-              : null,
-            background: card.color
-          }}
-        >
-          <Textarea
-            autoFocus
-            useCacheForDOMMeasurements
-            value={newText}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-            className="modal-textarea"
-            spellCheck={false}
-            onFocus={() => this.setState({ isTextareaFocused: true })}
-            onBlur={() => this.setState({ isTextareaFocused: false })}
-          />
-          {(card.date || checkboxes.total > 0) && (
-            <CardBadges date={card.date} checkboxes={checkboxes} />
-          )}
+        <div className="close-button" >
+            <button onClick={this.handleRequestClose}>&times;</button>
         </div>
-        {/* <CardOptions
-          isColorPickerOpen={isColorPickerOpen}
-          card={card}
-          listId={listId}
-          boundingRect={boundingRect}
-          isCardNearRightBorder={isCardNearRightBorder}
-          isThinDisplay={isThinDisplay}
-          toggleColorPicker={this.toggleColorPicker}
-        /> */}
+        <div className="modal-box">
+          <form className="modal-from" >
+            <div>
+              <label className="form-label">Name</label>
+              <input
+                autoFocus
+                useCacheForDOMMeasurements
+                value={newCard.name}
+                onChange={(event) => this.handleChange(event, "name")}
+                onKeyDown={(event) => this.handleKeyDown(event, "name")}
+                className="modal-input"
+                spellCheck={false}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Description</label>
+              <Textarea
+                autoFocus
+                useCacheForDOMMeasurements
+                value={newCard.description}
+                onChange={(event) => this.handleChange(event, "description")}
+                onKeyDown={(event) => this.handleKeyDown(event, "description")}
+                className="modal-textarea"
+                spellCheck={false}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Priority</label>
+              <Select
+                style={{ width: "50%"}}
+                values={[{label: newCard.priority, value: newCard.priority}]}
+                options={CONSTANTS.priority}
+                onChange={(value) => this.onChange(value, "priority")}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Status</label>
+              <Select
+                style={{ width: "50%"}}
+                values={[{label: newCard.status, value: newCard.status}]}
+                options={CONSTANTS.status}
+                onChange={(values) => this.onChange(values, "status")}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Assigned To</label>
+              <Select
+                style={{ width: "50%"}}
+                values={[{label: newCard.assigned_to, value: newCard.assigned_to}]}
+                options={CONSTANTS.users}
+                onChange={(value) => this.onChange(value, "assigned_to")}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Created By</label>
+              <Select
+                style={{ width: "50%"}}
+                values={[{label: newCard.created_by, value: newCard.created_by}]}
+                options={CONSTANTS.users}
+                onChange={(value) => this.onChange(value, "created_by")}
+              />
+            </div>
+
+            <div>
+              <label className="form-label">Created Date</label>
+              <p>{new Date(newCard.opened_at).toDateString()}</p>
+            </div>
+          </form>
+        </div>
       </Modal>
     );
   }

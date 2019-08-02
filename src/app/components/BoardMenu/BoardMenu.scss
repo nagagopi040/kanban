@@ -1,0 +1,39 @@
+@import "../../variables.scss";
+
+.board-menu {
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: $white;
+    height: 40px;
+    z-index: 999;
+}
+
+.custom-menu {
+    position: relative;
+    height: 100%;
+
+    &--title {
+        border: none;
+        background-color: transparent;
+        font-weight: bold;
+        height: 100%;
+    }
+
+    &--select {
+        position: absolute !important;
+        border: none !important;
+        min-height: 0 !important;
+
+        .react-dropdown-select-content,
+        .react-dropdown-select-dropdown-handle {
+            display: none;
+            visibility: hidden;
+        }
+    }
+
+}

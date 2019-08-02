@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .board-title {
-  position: absolute;
+  position: fixed;
   top: 50px;
   width: 100%;
   display: flex;
@@ -9,6 +9,7 @@
   align-items: center;
   box-sizing: border-box;
   color: $white;
+  z-index: 99;
 }
 
 .board-title-button {
