@@ -24,7 +24,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     }
   ];
@@ -43,7 +43,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     },
     {
@@ -59,7 +59,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     }
   ];
@@ -78,7 +78,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     },
     {
@@ -94,7 +94,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     }
   ];
@@ -113,7 +113,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     },
     {
@@ -129,7 +129,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     }
   ];
@@ -148,7 +148,7 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     },
     {
@@ -164,19 +164,19 @@ const createWelcomeBoard = userId => {
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Can't reproduce",
+      status: "Cannot reproduce",
       priority: "High"
     }
   ];
 
   return {
     _id: shortid.generate(),
-    title: "Tutorial board",
+    title: "Bugs & Issues Tracker",
     color: "blue",
     lists: [
       {
         _id: shortid.generate(),
-        title: "Uncategorized",
+        title: "",
         cards: appendAttributes(list1)
       },
       {

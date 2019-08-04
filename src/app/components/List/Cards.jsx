@@ -25,7 +25,7 @@ class Cards extends Component {
   };
 
   render() {
-    const { listId, cards } = this.props;
+    const { listId, cards, options } = this.props;
     return (
       <Droppable droppableId={listId}>
         {(provided, { isDraggingOver }) => (
@@ -38,6 +38,7 @@ class Cards extends Component {
                   cardId={cardId}
                   index={index}
                   listId={listId}
+                  options={options}
                 />
               ))}
               {provided.placeholder}
@@ -55,8 +56,13 @@ class Cards extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  cards: state.listsById[ownProps.listId].cards
-});
+const mapStateToProps = (state, ownProps) => {
+  const { boardId } = ownProps;
+  const options = state.boardsById[boardId] && state.boardsById[boardId].options ? state.boardsById[boardId].options : []
+  return {
+    cards: state.listsById[ownProps.listId].cards,
+    options
+  }
+};
 
 export default connect(mapStateToProps)(Cards);

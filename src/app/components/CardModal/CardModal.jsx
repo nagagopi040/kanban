@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Textarea from "react-textarea-autosize";
 import Modal from "react-modal";
-import Select from "react-dropdown-select";
+import Dropdown from "../Dropdown/Dropdown";
 
 import { CONSTANTS } from "./../utils";
 import "./CardModal.scss";
@@ -89,14 +89,14 @@ class CardModal extends Component {
   onChange = (value, key) => {
     const { newCard } = this.state;
     const { card, listId, dispatch } = this.props;
-    if(value.length && value[0].value !== newCard[key]){
+    if(value !== newCard[key]){
       dispatch({
         type: "CHANGE_CARD_CONTENT",
         payload: {
           ...newCard,
           cardId: card._id,
           listId,
-          newContent: {[key]:  value[0].value}
+          newContent: {[key]: value}
         }
       });
     }
@@ -109,7 +109,7 @@ class CardModal extends Component {
       return null;
     }
 
-    return (        
+    return (
       <Modal
         closeTimeoutMS={150}
         isOpen={isOpen}
@@ -129,7 +129,6 @@ class CardModal extends Component {
               <label className="form-label">Name</label>
               <input
                 autoFocus
-                useCacheForDOMMeasurements
                 value={newCard.name}
                 onChange={(event) => this.handleChange(event, "name")}
                 onKeyDown={(event) => this.handleKeyDown(event, "name")}
@@ -142,7 +141,6 @@ class CardModal extends Component {
               <label className="form-label">Description</label>
               <Textarea
                 autoFocus
-                useCacheForDOMMeasurements
                 value={newCard.description}
                 onChange={(event) => this.handleChange(event, "description")}
                 onKeyDown={(event) => this.handleKeyDown(event, "description")}
@@ -153,9 +151,8 @@ class CardModal extends Component {
 
             <div>
               <label className="form-label">Priority</label>
-              <Select
-                style={{ width: "50%"}}
-                values={[{label: newCard.priority, value: newCard.priority}]}
+              <Dropdown
+                value={newCard.priority}
                 options={CONSTANTS.priority}
                 onChange={(value) => this.onChange(value, "priority")}
               />
@@ -163,9 +160,9 @@ class CardModal extends Component {
 
             <div>
               <label className="form-label">Status</label>
-              <Select
+              <Dropdown
                 style={{ width: "50%"}}
-                values={[{label: newCard.status, value: newCard.status}]}
+                value={newCard.status}
                 options={CONSTANTS.status}
                 onChange={(values) => this.onChange(values, "status")}
               />
@@ -173,9 +170,9 @@ class CardModal extends Component {
 
             <div>
               <label className="form-label">Assigned To</label>
-              <Select
+              <Dropdown
                 style={{ width: "50%"}}
-                values={[{label: newCard.assigned_to, value: newCard.assigned_to}]}
+                value={newCard.assigned_to}
                 options={CONSTANTS.users}
                 onChange={(value) => this.onChange(value, "assigned_to")}
               />
@@ -183,9 +180,9 @@ class CardModal extends Component {
 
             <div>
               <label className="form-label">Created By</label>
-              <Select
+              <Dropdown
                 style={{ width: "50%"}}
-                values={[{label: newCard.created_by, value: newCard.created_by}]}
+                value={newCard.created_by}
                 options={CONSTANTS.users}
                 onChange={(value) => this.onChange(value, "created_by")}
               />

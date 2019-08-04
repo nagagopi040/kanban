@@ -8,7 +8,7 @@ import "./ListHeader.scss";
 
 class ListTitle extends Component {
   static propTypes = {
-    listTitle: PropTypes.string.isRequired,
+    listTitle: PropTypes.string,
     listId: PropTypes.string.isRequired,
     boardId: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
@@ -103,7 +103,7 @@ class ListTitle extends Component {
             }}
             className="list-title-button"
           >
-            {listTitle}
+            {listTitle ? listTitle : "Uncategorized"}
           </div>
         )}
         <Wrapper className="delete-list-wrapper" onSelection={this.deleteList}>

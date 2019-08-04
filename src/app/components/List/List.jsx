@@ -19,6 +19,7 @@ class List extends Component {
     const { list, boardId, index } = this.props;
     return (
       <Draggable
+        isDragDisabled={!list.title}
         draggableId={list._id}
         index={index}
         disableInteractiveElementBlocking
@@ -43,10 +44,10 @@ class List extends Component {
                   boardId={boardId}
                 />
                 <div className="cards-wrapper">
-                  <Cards listId={list._id} />
+                  <Cards listId={list._id} boardId={boardId} />
                 </div>
               </div>
-              <CardAdder listId={list._id} />
+              <CardAdder listId={list._id} boardId={boardId} />
             </div>
             {provided.placeholder}
           </>

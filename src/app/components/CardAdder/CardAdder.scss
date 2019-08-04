@@ -8,7 +8,7 @@
   float: right; // removes mysterious empty space at the bottom of the textarea somehow
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 8px;
+  padding: 10px;
   border: 0;
   border-radius: 3px;
   color: inherit;
@@ -22,12 +22,13 @@
   flex-shrink: 0;
   width: 39px;
   height: 39px;
-  margin-top: 6px;
+  margin-top: 5px;
   border: none;
-  border-radius: $list-radius;
+  border-radius: 50%;
   color: $white;
   background: $transparent-black;
   font-size: 28px;
+  padding-bottom: 5px;
   transition: background 0.1s;
   cursor: pointer;
 }

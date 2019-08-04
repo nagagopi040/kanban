@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import classnames from "classnames";
+import slugify from "slugify";
 
 import CardModal from "../CardModal/CardModal";
-import formatMarkdown from "./formatMarkdown";
 import "./Card.scss";
 
 class Card extends Component {
@@ -70,7 +70,7 @@ class Card extends Component {
   };
 
   render() {
-    const { card, index, listId, isDraggingOver } = this.props;
+    const { card, index, listId, isDraggingOver, options } = this.props;
     const { isModalOpen } = this.state;
     return (
       <>
@@ -79,8 +79,8 @@ class Card extends Component {
             <div className="card">
               {/* eslint-disable */}
               <div
-                className={classnames("card-title", {
-                  "card-title--drag": snapshot.isDragging
+                className={classnames("cardbody", {
+                  "cardbody--drag": snapshot.isDragging
                 })}
                 ref={ref => {
                   provided.innerRef(ref);
@@ -101,12 +101,30 @@ class Card extends Component {
                   background: card.color
                 }}
               >
-                <div
-                  className="card-title-html"
-                  dangerouslySetInnerHTML={{
-                    __html: formatMarkdown(card.name)
-                  }}
-                />
+                <div className="card-title">
+                  <h4>{card.name}</h4>
+                </div>
+                {
+                  options.length ? options.map( option => {
+                    var key =  option ? slugify(option, {lower: true}) : null;
+                    return (
+                      <Fragment key={option} >
+                        {
+                          card[key] ?
+                          <div className="card-item">
+                            <div className="card-item-title">{option}</div>
+                            <p className="card-item-value">{card[key]}</p>
+                          </div>
+                          :
+                          null
+                        }
+                      </Fragment>
+                    )
+                  })
+                  :
+                  null
+                }
+
               </div>
               {/* Remove placeholder when not dragging over to reduce snapping */}
               {isDraggingOver && provided.placeholder}
@@ -127,6 +145,6 @@ class Card extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   card: state.cardsById[ownProps.cardId]
-});
+})
 
 export default connect(mapStateToProps)(Card);

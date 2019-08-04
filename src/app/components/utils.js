@@ -25,33 +25,8 @@ export const filteredList = (lists, value) => {
 };
 
 export const CONSTANTS = {
-  options: [
-    { label: "Description", value: "Description" },
-    { label: "Priority", value: "Priority" },
-    { label: "Status", value: "Status" },
-    { label: "Created By", value: "Created By" },
-    { label: "Opened Date", value: "Opened Date" }
-  ],
-  priority: [
-    { label: "", value: null },
-    { label: "Critical", value: "Critical" },
-    { label: "High", value: "High" },
-    { label: "Normal", value: "Normal" },
-    { label: "Low", value: "Low" }
-  ],
-  status: [
-    { label: "", value: null },
-    { label: "Complete", value: "Complete" },
-    { label: "In-progress", value: "In-progress" },
-    { label: "Can't reproduce", value: "Can't reproduce" },
-    { label: "Blocked", value: "Blocked" },
-    { label: "Duplicate", value: "Duplicate" }
-  ],
-  users: [
-    { label: "Gopi", value: "Gopi" },
-    { label: "Chandru", value: "Chandru" },
-    { label: "David", value: "David" },
-    { label: "Brunt", value: "Brunt" },
-    { label: "Micheal", value: "Micheal" }
-  ]
+  options: [ "Description", "Priority", "Status", "Created By", "Assigned To", "Opened Date"],
+  priority: [ "Critical", "High", "Normal", "Low"],
+  status: ["Complete", "In-Progress", "Cannot reproduce", "Blocked", "Duplicate"],
+  users: ["Naga Gopi", "David", "Micheal", "Brunt"]
 };

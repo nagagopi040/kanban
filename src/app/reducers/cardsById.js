@@ -6,7 +6,6 @@ const cardsById = (state = {}, action) => {
     }
     case "CHANGE_CARD_CONTENT": {
       const { newContent, cardId } = action.payload;
-      console.log(cardId, state[cardId], { ...state[cardId], ...newContent });
       return { ...state, [cardId]: { ...state[cardId], ...newContent } };
     }
     case "CHANGE_CARD_DATE": {

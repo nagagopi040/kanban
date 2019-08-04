@@ -1,45 +1,53 @@
 import React, { Component } from 'react';
-import Select from "react-dropdown-select";
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import MultiSelect from "../Dropdown/MultiSelect";
 
-import { CONSTANTS } from "./../utils";
 import "./BoardMenu.scss"
 
-export default class BoardMenu extends Component {
-    constructor(props){
-        super(props);
+class BoardMenu extends Component {
+    static propTypes = {
+        values: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        boardId: PropTypes.string.isRequired,
+        dispatch: PropTypes.func.isRequired
+    };    
 
-        this.state = {
-            isOpen: false
-        }
-    }
-
-    onChange = (value) => {
-
-    }
-
-    toggleMenu = () => {
-        this.setState((prevState) => ({ isOpen: !prevState.isOpen }))
+    onChange = (values) => {
+        const { boardId , dispatch } = this.props;
+        this.setState({values});
+        dispatch({
+            type: "PUT_BOARD_OPTIONS",
+            payload: { boardId, options: values }
+        });
     }
 
     render() {
-        const { isOpen } = this.state;
-        return(
+        return (
             <div className="board-menu">
                 <h3>Bug Pipeline(Kanban View)</h3>
                 <div>
                     <h4 className="stack">Stacked by Priority</h4>
                 </div>
                 <div className="custom-menu">
-                    <button className="custom-menu--title" onClick ={this.toggleMenu}>Customize Cards</button>
-                    <Select
-                        multi
-                        keepOpen={isOpen}
-                        className="custom-menu--select"
-                        options={CONSTANTS.options}
-                        onChange={(values) => this.onChange(values)}
+                    <MultiSelect
+                        values={this.props.values}
+                        onChange={this.onChange}
                     />
                 </div>
             </div>
         )
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    const { boardId } = ownProps.match.params;
+    return {
+        boardId,
+        values: state.boardsById[boardId].options
+    };
+};
+
+export default withRouter(connect(mapStateToProps)(BoardMenu));

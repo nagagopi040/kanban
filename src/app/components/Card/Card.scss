@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 
-.card-title {
+.cardbody {
   position: relative;
   box-sizing: border-box;
   margin: 8px 5px 0 5px;
@@ -15,42 +15,29 @@
   cursor: pointer !important;
 }
 
-.card-title:focus {
+.cardbody:focus {
   box-shadow: 0px 0px 1px 3px rgb(0, 180, 255);
 }
 
-.card-title--drag {
+.cardbody--drag {
   box-shadow: 1px 9px 8px 1px rgba(0, 0, 0, 0.3) !important;
   opacity: 1 !important;
 }
 
-.card-title-html {
-  padding: 6px 8px;
+.card-title {
+  padding: 5px 10px;
+}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
+.card-item {
+  width: 100%;
+  padding: 10px;
+
+  &-title {
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
-  img {
-    max-width: 100%;
-  }
-
-  p {
-    margin: 4px 0;
-  }
-
-  code,
-  pre {
-    white-space: pre-wrap;
-  }
-  pre {
-    margin: 4px 0;
-    padding: 4px 2px;
-    background: rgba(100, 100, 100, 0.08);
+  &-value {
+    opacity: 0.7;
   }
 }

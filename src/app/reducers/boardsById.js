@@ -39,7 +39,8 @@ const boardsById = (state = {}, action) => {
           title: boardTitle,
           lists: [],
           users: [userId],
-          color: "blue"
+          color: "blue",
+          options: []
         }
       };
     }
@@ -67,6 +68,16 @@ const boardsById = (state = {}, action) => {
       const { boardId } = action.payload;
       const { [boardId]: deletedBoard, ...restOfBoards } = state;
       return restOfBoards;
+    }
+    case "PUT_BOARD_OPTIONS": {
+      const { boardId, options } = action.payload;
+      return {
+        ...state,
+        [boardId]: {
+          ...state[boardId],
+          options
+        }
+      };
     }
     default:
       return state;

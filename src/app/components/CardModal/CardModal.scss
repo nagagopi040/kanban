@@ -6,6 +6,7 @@
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 9999 !important;
 }
 
 .ReactModal__Body--open {
@@ -40,8 +41,15 @@
   font-size: 16px;
   overflow-y: scroll;
 
-  form {
-    margin-bottom: 10px;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: #ddd;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #aaa;
   }
 }
 
@@ -60,6 +68,15 @@
     width: 20px;
     font-size: 16px;
     color: $white;
+    outline: transparent;
+  }
+}
+
+form {
+  margin-bottom: 10px;
+
+  p {
+    margin: 0 5px;
   }
 }
 
@@ -67,6 +84,8 @@
   display: block;
   width: 100%;
   padding: 10px 0;
+  font-weight: bold;
+  opacity: 0.6;
   text-transform: uppercase;
 }
 
