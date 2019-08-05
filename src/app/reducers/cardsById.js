@@ -1,20 +1,13 @@
 const cardsById = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CARD": {
-      const { cardText, cardId } = action.payload;
-      return { ...state, [cardId]: { name: cardText, _id: cardId, opened_at: new Date().toISOString() } };
+      const { listTitle, category, cardId } = action.payload;
+      console.log({ ...state, [cardId]: { _id: cardId, [category]:  listTitle, opened_at: new Date().toISOString() } })
+      return { ...state, [cardId]: { _id: cardId, [category]:  listTitle, opened_at: new Date().toISOString() } };
     }
     case "CHANGE_CARD_CONTENT": {
       const { newContent, cardId } = action.payload;
       return { ...state, [cardId]: { ...state[cardId], ...newContent } };
-    }
-    case "CHANGE_CARD_DATE": {
-      const { date, cardId } = action.payload;
-      return { ...state, [cardId]: { ...state[cardId], date } };
-    }
-    case "CHANGE_CARD_COLOR": {
-      const { color, cardId } = action.payload;
-      return { ...state, [cardId]: { ...state[cardId], color } };
     }
     case "DELETE_CARD": {
       const { cardId } = action.payload;
@@ -30,6 +23,15 @@ const cardsById = (state = {}, action) => {
           (newState, cardId) => ({ ...newState, [cardId]: state[cardId] }),
           {}
         );
+    }
+    case "CHANGE_LIST_TITLE": {
+      var { category, cards, newTitle } = action.payload;
+      cards.map( card => {
+        state[card][category] = newTitle;
+        return {
+          ...state
+        }
+      })
     }
     default:
       return state;

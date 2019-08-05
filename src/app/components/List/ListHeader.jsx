@@ -3,16 +3,17 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Textarea from "react-textarea-autosize";
 import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
-import FaTrash from "react-icons/lib/fa/trash";
+import Trash from "react-icons/lib/fa/trash";
+import Edit from "react-icons/lib/fa/edit";
+import Caret from "react-icons/lib/fa/caret-down";
+
 import "./ListHeader.scss";
 
 class ListTitle extends Component {
   static propTypes = {
-    listTitle: PropTypes.string,
-    listId: PropTypes.string.isRequired,
+    listTitle: PropTypes.string.isRequired,
     boardId: PropTypes.string.isRequired,
     cards: PropTypes.array.isRequired,
-    dragHandleProps: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 
@@ -20,9 +21,14 @@ class ListTitle extends Component {
     super(props);
     this.state = {
       isOpen: false,
+      isModalOpen: false,
       newTitle: props.listTitle
     };
   }
+
+  toggleCardEditor = () => {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
+  };
 
   handleChange = event => {
     this.setState({ newTitle: event.target.value });
@@ -39,12 +45,18 @@ class ListTitle extends Component {
 
   handleSubmit = () => {
     const { newTitle } = this.state;
-    const { listTitle, listId, dispatch } = this.props;
+    const { listTitle, cards, category, boardId, dispatch } = this.props;
     if (newTitle === "") return;
     if (newTitle !== listTitle) {
       dispatch({
         type: "CHANGE_LIST_TITLE",
-        payload: { listTitle: newTitle, listId }
+        payload: {
+          listTitle,
+          cards,
+          category,
+          newTitle: newTitle,
+          boardId
+        }
       });
     }
     this.setState({ isOpen: false });
@@ -55,10 +67,10 @@ class ListTitle extends Component {
   };
 
   deleteList = () => {
-    const { listId, cards, boardId, dispatch } = this.props;
+    const { listTitle, cards, boardId, dispatch } = this.props;
     dispatch({
       type: "DELETE_LIST",
-      payload: { cards, listId, boardId }
+      payload: { cards, listTitle, boardId }
     });
   };
 
@@ -75,7 +87,7 @@ class ListTitle extends Component {
 
   render() {
     const { isOpen, newTitle } = this.state;
-    const { dragHandleProps, listTitle } = this.props;
+    const { listTitle } = this.props;
     return (
       <div className="list-header">
         {isOpen ? (
@@ -92,27 +104,23 @@ class ListTitle extends Component {
             />
           </div>
         ) : (
-          <div
-            {...dragHandleProps}
-            role="button"
-            tabIndex={0}
-            onClick={this.openTitleEditor}
-            onKeyDown={event => {
-              this.handleButtonKeyDown(event);
-              dragHandleProps.onKeyDown(event);
-            }}
-            className="list-title-button"
-          >
+          <div className="list-title-button">
             {listTitle ? listTitle : "Uncategorized"}
           </div>
         )}
-        <Wrapper className="delete-list-wrapper" onSelection={this.deleteList}>
-          <Button className="delete-list-button">
-            <FaTrash />
+        <Wrapper className="toggle-wrapper">
+          <Button className="toggle-button">
+            <Caret />
           </Button>
-          <Menu className="delete-list-menu">
-            <div className="delete-list-header">Are you sure?</div>
-            <MenuItem className="delete-list-confirm">Delete</MenuItem>
+          <Menu className="toggle-menu">
+            <div className="toggle-body">
+              <MenuItem className="toggle-item" onClick={this.openTitleEditor}>
+                <Edit /> Rename Stack
+              </MenuItem>
+              <MenuItem className="toggle-item" onClick={this.deleteList}>
+                <Trash /> Delete Stack
+              </MenuItem>
+            </div>
           </Menu>
         </Wrapper>
       </div>

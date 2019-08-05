@@ -41,12 +41,12 @@
   resize: none;
 }
 
-.delete-list-wrapper {
+.toggle-wrapper {
   position: relative;
   align-self: flex-start;
 }
 
-.delete-list-button {
+.toggle-button {
   display: flex;
   align-items: center;
   margin: 4px;
@@ -57,16 +57,16 @@
   cursor: pointer;
 }
 
-.delete-list-button:hover,
-.delete-list-button:focus {
-  background: $transparent-black;
+.toggle-button:hover,
+.toggle-button:focus {
+  background: transparent;
 }
 
-.delete-list-button {
+.toggle-button {
   cursor: pointer;
 }
 
-.delete-list-menu {
+.toggle-menu {
   position: absolute;
   top: 100%;
   left: -60px;
@@ -84,17 +84,12 @@
   z-index: 1;
 }
 
-.delete-list-confirm {
+.toggle-item {
   margin-top: 5px;
-  padding: 8px 30px;
+  padding: 10px;
   border-radius: 6px;
-  color: white;
-  background: red;
-  text-align: center;
+  font-size: 16px;
+  color: inherit;
+  text-align: left;
   cursor: pointer;
-}
-
-.delete-list-confirm:hover,
-.delete-list-confirm:focus {
-  background: darkred;
 }

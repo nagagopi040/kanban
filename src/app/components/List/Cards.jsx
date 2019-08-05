@@ -6,7 +6,7 @@ import Card from "../Card/Card";
 
 class Cards extends Component {
   static propTypes = {
-    listId: PropTypes.string.isRequired,
+    listTitle: PropTypes.string.isRequired,
     cards: PropTypes.arrayOf(PropTypes.string).isRequired
   };
 
@@ -25,9 +25,9 @@ class Cards extends Component {
   };
 
   render() {
-    const { listId, cards, options } = this.props;
+    const { listId, cards, options, listTitle, category } = this.props;
     return (
-      <Droppable droppableId={listId}>
+      <Droppable droppableId={listTitle}>
         {(provided, { isDraggingOver }) => (
           <>
             <div className="cards" ref={provided.innerRef}>
@@ -37,7 +37,8 @@ class Cards extends Component {
                   key={cardId}
                   cardId={cardId}
                   index={index}
-                  listId={listId}
+                  listTitle={listTitle}
+                  category={category}
                   options={options}
                 />
               ))}
@@ -58,10 +59,12 @@ class Cards extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { boardId } = ownProps;
-  const options = state.boardsById[boardId] && state.boardsById[boardId].options ? state.boardsById[boardId].options : []
+  const options = state.boardsById[boardId] && state.boardsById[boardId].options ? state.boardsById[boardId].options : [];
+  const category = state.boardsById[boardId] && state.boardsById[boardId].category ? state.boardsById[boardId].category : [];
   return {
-    cards: state.listsById[ownProps.listId].cards,
-    options
+    cards: state.listsById[ownProps.listTitle].cards,
+    options,
+    category
   }
 };
 

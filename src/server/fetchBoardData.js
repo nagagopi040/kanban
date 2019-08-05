@@ -8,7 +8,7 @@ const normalizeBoards = boards => {
   const list = new schema.Entity(
     "listsById",
     { cards: [card] },
-    { idAttribute: "_id" }
+    { idAttribute: "title" }
   );
   const board = new schema.Entity(
     "boardsById",

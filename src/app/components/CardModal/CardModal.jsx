@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Textarea from "react-textarea-autosize";
+import Trash from "react-icons/lib/fa/trash";
 import Modal from "react-modal";
 import Dropdown from "../Dropdown/Dropdown";
 
@@ -20,12 +20,8 @@ class CardModal extends Component {
       priority: PropTypes.string,
       color: PropTypes.string
     }).isRequired,
-    listId: PropTypes.string.isRequired,
-    cardElement: PropTypes.shape({
-      getBoundingClientRect: PropTypes.func.isRequired
-    }),
+    listTitle: PropTypes.string.isRequired,
     isOpen: PropTypes.bool.isRequired,
-    toggleCardEditor: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 
@@ -43,6 +39,17 @@ class CardModal extends Component {
     this.setState({ newCard : nextProps.card });
   };
 
+  deleteCard = () => {
+    const { card, listTitle, dispatch } = this.props;
+    dispatch({
+      type: "DELETE_CARD",
+      payload: {
+        cardId: card._id,
+        listTitle
+      }
+    });
+  }
+
   handleKeyDown = (event, key) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
       event.preventDefault();
@@ -52,16 +59,14 @@ class CardModal extends Component {
 
   submitCard = (key) => {
     const { newCard } = this.state;
-    const { card, listId, dispatch } = this.props;
-    if (newCard[key] === "") {
-      this.deleteCard();
-    } else if (newCard[key] !== card[key]) {
+    const { card, listTitle, category, dispatch } = this.props;
+    if(newCard[key] !== card[key]) {
       dispatch({
         type: "CHANGE_CARD_CONTENT",
         payload: {
-          ...newCard,
           cardId: card._id,
-          listId,
+          listTitle,
+          category,
           newContent: {[key]: newCard[key]}
         }
       });
@@ -88,14 +93,15 @@ class CardModal extends Component {
 
   onChange = (value, key) => {
     const { newCard } = this.state;
-    const { card, listId, dispatch } = this.props;
+    const { card, listTitle, category, dispatch } = this.props;
     if(value !== newCard[key]){
       dispatch({
         type: "CHANGE_CARD_CONTENT",
         payload: {
           ...newCard,
           cardId: card._id,
-          listId,
+          listTitle,
+          category,
           newContent: {[key]: value}
         }
       });
@@ -104,11 +110,7 @@ class CardModal extends Component {
 
   render() {
     const { newCard } = this.state;
-    const { cardElement, isOpen } = this.props;
-    if (!cardElement) {
-      return null;
-    }
-
+    const { isOpen } = this.props;
     return (
       <Modal
         closeTimeoutMS={150}
@@ -123,12 +125,14 @@ class CardModal extends Component {
         <div className="close-button" >
             <button onClick={this.handleRequestClose}>&times;</button>
         </div>
+        <div className="delete-card-button">
+          <button onClick={this.deleteCard}><Trash /> Delete Card</button>
+        </div>
         <div className="modal-box">
           <form className="modal-from" >
             <div>
               <label className="form-label">Name</label>
               <input
-                autoFocus
                 value={newCard.name}
                 onChange={(event) => this.handleChange(event, "name")}
                 onKeyDown={(event) => this.handleKeyDown(event, "name")}
@@ -136,11 +140,10 @@ class CardModal extends Component {
                 spellCheck={false}
               />
             </div>
-
+      
             <div>
               <label className="form-label">Description</label>
-              <Textarea
-                autoFocus
+              <textarea
                 value={newCard.description}
                 onChange={(event) => this.handleChange(event, "description")}
                 onKeyDown={(event) => this.handleKeyDown(event, "description")}

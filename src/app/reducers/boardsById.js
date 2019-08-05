@@ -79,6 +79,15 @@ const boardsById = (state = {}, action) => {
         }
       };
     }
+    case "CHANGE_LIST_TITLE": {
+      const { newTitle, listTitle, boardId } = action.payload;
+      let lists = state[boardId].lists;
+      let index = lists.indexOf(listTitle);
+      lists.splice(index, 1, newTitle)
+      return {
+        ...state
+      };
+    }
     default:
       return state;
   }

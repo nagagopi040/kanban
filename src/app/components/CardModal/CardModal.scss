@@ -72,6 +72,18 @@
   }
 }
 
+.delete-card-button {
+
+  button{
+    margin: 0 10px;
+    padding: 5px;
+    background-color: rgba(255, 0, 0, 0.6);
+    outline: transparent;
+    border: 1px solid rgba(255, 0, 0, 0.6);
+    border-radius: 5px;
+  }
+}
+
 form {
   margin-bottom: 10px;
 

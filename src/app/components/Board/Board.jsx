@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Title } from "react-head";
@@ -44,7 +44,7 @@ class Board extends Component {
     if (!destination) {
       return;
     }
-    const { dispatch, boardId } = this.props;
+    const { dispatch, boardId, category } = this.props;
 
     // Move list
     if (type === "COLUMN") {
@@ -69,11 +69,12 @@ class Board extends Component {
       dispatch({
         type: "MOVE_CARD",
         payload: {
-          sourceListId: source.droppableId,
-          destListId: destination.droppableId,
+          sourceListTitle: source.droppableId,
+          destListTitle: destination.droppableId,
           oldCardIndex: source.index,
           newCardIndex: destination.index,
-          boardId
+          boardId,
+          category
         }
       });
     }
@@ -133,7 +134,7 @@ class Board extends Component {
   };
 
   render = () => {
-    const { lists, boardTitle, boardId, boardColor } = this.props;
+    const { lists, boardTitle, boardId, boardColor, category } = this.props;
     return (
       <>
         <div className={classnames("board", boardColor)}>
@@ -157,12 +158,20 @@ class Board extends Component {
                 {provided => (
                   <div className="lists" ref={provided.innerRef}>
                     {lists.map((list, index) => (
-                      <List
-                        list={list}
-                        boardId={boardId}
-                        index={index}
-                        key={list._id}
-                      />
+                      <Fragment key={index}>
+                        {
+                          list ?
+                            <List
+                              list={list}
+                              boardId={boardId}
+                              index={index}
+                              key={index}
+                              category={category}
+                            />
+                          :
+                            null
+                        }
+                      </Fragment>
                     ))}
                     {provided.placeholder}
                     <ListAdder boardId={boardId} />
@@ -180,11 +189,13 @@ class Board extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { board } = ownProps;
+  console.log(state);
   return {
-    lists: board.lists.map(listId => state.listsById[listId]),
+    lists: board.lists.map(listTitle => state.listsById[listTitle]),
     boardTitle: board.title,
     boardColor: board.color,
-    boardId: board._id
+    boardId: board._id,
+    category: board.category
   };
 };
 

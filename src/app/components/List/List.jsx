@@ -16,7 +16,7 @@ class List extends Component {
   };
 
   render = () => {
-    const { list, boardId, index } = this.props;
+    const { list, boardId, category, index } = this.props;
     return (
       <Draggable
         isDragDisabled={!list.title}
@@ -39,15 +39,15 @@ class List extends Component {
                 <ListHeader
                   dragHandleProps={provided.dragHandleProps}
                   listTitle={list.title}
-                  listId={list._id}
+                  category={category}
                   cards={list.cards}
                   boardId={boardId}
                 />
                 <div className="cards-wrapper">
-                  <Cards listId={list._id} boardId={boardId} />
+                  <Cards listTitle={list.title} boardId={boardId} />
                 </div>
               </div>
-              <CardAdder listId={list._id} boardId={boardId} />
+              <CardAdder listTitle={list.title} category={category} boardId={boardId} />
             </div>
             {provided.placeholder}
           </>

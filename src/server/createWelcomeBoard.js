@@ -16,16 +16,14 @@ const createWelcomeBoard = userId => {
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
-      status: "complete",
-      priority: "High"
+      status: "complete"
     },
     {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
-      status: "Cannot reproduce",
-      priority: "High"
+      status: "Cannot reproduce"
     }
   ];
 
@@ -36,7 +34,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Critical"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -44,7 +42,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Critical"
     },
     {
       name: "Motion detection isn't working for the PorchCam camera",
@@ -52,7 +50,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Critical"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -60,7 +58,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Critical"
     }
   ];
 
@@ -106,7 +104,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Normal"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -114,7 +112,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Normal"
     },
     {
       name: "Motion detection isn't working for the PorchCam camera",
@@ -122,7 +120,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Normal"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -130,7 +128,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Normal"
     }
   ];
 
@@ -141,7 +139,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Low"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -149,7 +147,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Low"
     },
     {
       name: "Motion detection isn't working for the PorchCam camera",
@@ -157,7 +155,7 @@ const createWelcomeBoard = userId => {
       created_by: "Mattheus Anderson",
       opened_at: "2019-08-01T10:58:50.300Z",
       status: "complete",
-      priority: "High"
+      priority: "Low"
     },
     {
       name: "Fuzzy images from night vision recordings",
@@ -165,7 +163,7 @@ const createWelcomeBoard = userId => {
       created_by: "Gabriella Lily",
       opened_at: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
-      priority: "High"
+      priority: "Low"
     }
   ];
 
@@ -173,10 +171,11 @@ const createWelcomeBoard = userId => {
     _id: shortid.generate(),
     title: "Bugs & Issues Tracker",
     color: "blue",
+    category: "priority",
     lists: [
       {
         _id: shortid.generate(),
-        title: "",
+        title: "Uncategorized",
         cards: appendAttributes(list1)
       },
       {

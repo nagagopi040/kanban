@@ -22,7 +22,7 @@ class Home extends Component {
     history: PropTypes.object.isRequired
   };
   render = () => {
-    const { boards, listsById, history } = this.props;
+    const { boards, history } = this.props;
     return (
       <>
         <Title>Home | React Kanban</Title>

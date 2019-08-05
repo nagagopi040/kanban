@@ -20,7 +20,7 @@ class Card extends Component {
       priority: PropTypes.string,
       color: PropTypes.string
     }).isRequired,
-    listId: PropTypes.string.isRequired,
+    listTitle: PropTypes.string.isRequired,
     isDraggingOver: PropTypes.bool.isRequired,
     index: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -70,7 +70,7 @@ class Card extends Component {
   };
 
   render() {
-    const { card, index, listId, isDraggingOver, options } = this.props;
+    const { card, index, listTitle, category, isDraggingOver, options } = this.props;
     const { isModalOpen } = this.state;
     return (
       <>
@@ -135,7 +135,8 @@ class Card extends Component {
           isOpen={isModalOpen}
           cardElement={this.ref}
           card={card}
-          listId={listId}
+          listTitle={listTitle}
+          category={category}
           toggleCardEditor={this.toggleCardEditor}
         />
       </>
