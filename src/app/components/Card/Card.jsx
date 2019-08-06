@@ -69,8 +69,12 @@ class Card extends Component {
     });
   };
 
+  convertDate = (date) => {
+    return new Date(date).toDateString()
+  }
+
   render() {
-    const { card, index, listTitle, category, isDraggingOver, options } = this.props;
+    const { card, index, listTitle, category, isDraggingOver, allOptions, selectedOptions } = this.props;
     const { isModalOpen } = this.state;
     return (
       <>
@@ -102,29 +106,23 @@ class Card extends Component {
                 }}
               >
                 <div className="card-title">
-                  <h4>{card.name}</h4>
+                  <h4>{card.name ? card.name : "Undefined name"}</h4>
                 </div>
                 {
-                  options.length ? options.map( option => {
-                    var key =  option ? slugify(option, {lower: true}) : null;
-                    return (
-                      <Fragment key={option} >
-                        {
-                          card[key] ?
-                          <div className="card-item">
-                            <div className="card-item-title">{option}</div>
-                            <p className="card-item-value">{card[key]}</p>
-                          </div>
-                          :
-                          null
-                        }
-                      </Fragment>
-                    )
+                  allOptions.length ? allOptions.map( option => {
+                    var key = slugify(option, {replacement: '_', lower: true});
+                    if(selectedOptions.includes(option) && card[key]) {
+                      return (
+                        <div className="card-item" key={key}>
+                          <div className="card-item-title">{option}</div>
+                          <p className="card-item-value">{ key === "opened_date" ? this.convertDate(card[key]) : card[key]}</p>
+                        </div>
+                      )
+                    } else return null;
                   })
                   :
                   null
                 }
-
               </div>
               {/* Remove placeholder when not dragging over to reduce snapping */}
               {isDraggingOver && provided.placeholder}

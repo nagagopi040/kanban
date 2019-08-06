@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+import Caret from "react-icons/lib/fa/caret-down";
 
 import ClickOutside from "../ClickOutside/ClickOutside";
-import { CONSTANTS } from "../utils";
 import "./MultiSelect.scss";
 
 export default class MultiSelect extends Component {
     static propTypes = {
-        values: PropTypes.arrayOf(PropTypes.string),
+        allOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+        selectedOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
         onChange: PropTypes.func.isRequired
     };
 
@@ -16,7 +17,7 @@ export default class MultiSelect extends Component {
 
         this.state = {
             dropdownOpen: false,
-            values: props.values ? props.values : []
+            selectedOptions: props.selectedOptions ? props.selectedOptions : []
         }
     }
 
@@ -32,25 +33,26 @@ export default class MultiSelect extends Component {
         })
     }
 
-    onChange = (event, newValue, index) => {
+    onChange = (event, newValue) => {
         const { checked } = event.target;
-        var { values } = this.state;
-        if(checked && !values.includes(newValue)){
-            values[index] = newValue;
-            this.setState({values});
-            this.props.onChange(values);
+        var { selectedOptions } = this.state;
+        if(checked && !selectedOptions.includes(newValue)){
+            selectedOptions.push(newValue);
+            this.setState({selectedOptions});
+            this.props.onChange(selectedOptions);
         } else {
-            if (values.includes(newValue)) {
-                values[index] = null;
-                this.setState({values});
-                this.props.onChange(values);
+            let index = selectedOptions.indexOf(newValue);
+            if (index > -1) {
+                selectedOptions.splice(index, 1);
+                this.setState({selectedOptions});
+                this.props.onChange(selectedOptions);
             }
         }
     }
 
     renderDefaultChecked = (option) => {
-        const { values } = this.props;
-        if(values && values.length && values.includes(option)) {
+        const { selectedOptions } = this.props;
+        if(selectedOptions.length && selectedOptions.includes(option)) {
             return true
         }
         return false;
@@ -58,20 +60,21 @@ export default class MultiSelect extends Component {
 
     render() {
         const { dropdownOpen } = this.state;
+        const { allOptions } = this.props;
         return (
             <ClickOutside handleClickOutside={this.closeDropdown}>
                 <div className="dropdown show">
-                    <button className="dropdown-button" onClick={this.toggle}><h4>Customize Cards</h4></button>
+                    <button className="dropdown-button" onClick={this.toggle}><h4>Customize Cards <Caret /></h4></button>
                     <div className={`dropdown-menu${dropdownOpen ? "-toggle": ""}`} aria-labelledby="dropdown-menu" >
                         {
-                            CONSTANTS.options.map( (option, index) => (
+                            allOptions.map( (option, index) => (
                                 <div className="dropdown-item" key={option}>
                                     <input
                                         type="checkbox" 
                                         defaultChecked={this.renderDefaultChecked(option)}
                                         name={option}
                                         id={option}
-                                        onChange={(event) => this.onChange(event, option, index)}
+                                        onChange={(event) => this.onChange(event, option)}
                                     />
                                     <label htmlFor={option}>{option}</label>
                                 </div>

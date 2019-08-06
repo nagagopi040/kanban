@@ -15,7 +15,7 @@ class CardModal extends Component {
       name: PropTypes.string,
       description: PropTypes.string,
       created_by: PropTypes.string,
-      opened_at: PropTypes.string,
+      opened_date: PropTypes.string,
       status: PropTypes.string,
       priority: PropTypes.string,
       color: PropTypes.string
@@ -193,7 +193,7 @@ class CardModal extends Component {
 
             <div>
               <label className="form-label">Created Date</label>
-              <p>{new Date(newCard.opened_at).toDateString()}</p>
+              <p>{new Date(newCard.opened_date).toDateString()}</p>
             </div>
           </form>
         </div>

@@ -15,14 +15,14 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete"
     },
     {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce"
     }
   ];
@@ -32,7 +32,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Critical"
     },
@@ -40,7 +40,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Critical"
     },
@@ -48,7 +48,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Critical"
     },
@@ -56,7 +56,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Critical"
     }
@@ -67,7 +67,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "High"
     },
@@ -75,7 +75,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "High"
     },
@@ -83,7 +83,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "High"
     },
@@ -91,7 +91,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "High"
     }
@@ -102,7 +102,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Normal"
     },
@@ -110,7 +110,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Normal"
     },
@@ -118,7 +118,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Normal"
     },
@@ -126,7 +126,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Normal"
     }
@@ -137,7 +137,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Low"
     },
@@ -145,7 +145,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Low"
     },
@@ -153,7 +153,7 @@ const createWelcomeBoard = userId => {
       name: "Motion detection isn't working for the PorchCam camera",
       description: "PorchCam camera does not seem to be responding to any motion (even those well within the range of 50 ft). Recording and all other functionality of the PorchCam device doesn't seem to be impacted at all though",
       created_by: "Mattheus Anderson",
-      opened_at: "2019-08-01T10:58:50.300Z",
+      opened_date: "2019-08-01T10:58:50.300Z",
       status: "complete",
       priority: "Low"
     },
@@ -161,7 +161,7 @@ const createWelcomeBoard = userId => {
       name: "Fuzzy images from night vision recordings",
       description: `User reports that the images sometimes "fuzz out" or have a period where the image quality is low resolution`,
       created_by: "Gabriella Lily",
-      opened_at: "2019-06-01T10:58:50.300Z",
+      opened_date: "2019-06-01T10:58:50.300Z",
       status: "Cannot reproduce",
       priority: "Low"
     }
@@ -172,6 +172,8 @@ const createWelcomeBoard = userId => {
     title: "Bugs & Issues Tracker",
     color: "blue",
     category: "priority",
+    allOptions: ["Description", "Priority", "Status", "Created By", "Assigned To", "Opened Date"],
+    selectedOptions: ["Description", "Priority", "Status"],
     lists: [
       {
         _id: shortid.generate(),

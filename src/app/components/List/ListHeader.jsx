@@ -22,7 +22,7 @@ class ListTitle extends Component {
     this.state = {
       isOpen: false,
       isModalOpen: false,
-      newTitle: props.listTitle
+      newTitle: props.listTitle === "Uncategorized" ? "" : props.listTitle
     };
   }
 
@@ -105,7 +105,7 @@ class ListTitle extends Component {
           </div>
         ) : (
           <div className="list-title-button">
-            {listTitle ? listTitle : "Uncategorized"}
+            {listTitle}
           </div>
         )}
         <Wrapper className="toggle-wrapper">

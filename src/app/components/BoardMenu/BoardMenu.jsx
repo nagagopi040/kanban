@@ -8,7 +8,7 @@ import "./BoardMenu.scss"
 
 class BoardMenu extends Component {
     static propTypes = {
-        values: PropTypes.arrayOf(
+        selectedOptions: PropTypes.arrayOf(
             PropTypes.string
         ),
         boardId: PropTypes.string.isRequired,
@@ -20,7 +20,7 @@ class BoardMenu extends Component {
         this.setState({values});
         dispatch({
             type: "PUT_BOARD_OPTIONS",
-            payload: { boardId, options: values }
+            payload: { boardId, selectedOptions: values }
         });
     }
 
@@ -33,7 +33,8 @@ class BoardMenu extends Component {
                 </div>
                 <div className="custom-menu">
                     <MultiSelect
-                        values={this.props.values}
+                        allOptions={this.props.allOptions}
+                        selectedOptions={this.props.selectedOptions}
                         onChange={this.onChange}
                     />
                 </div>
@@ -46,7 +47,8 @@ const mapStateToProps = (state, ownProps) => {
     const { boardId } = ownProps.match.params;
     return {
         boardId,
-        values: state.boardsById[boardId].options
+        allOptions: state.boardsById[boardId].allOptions,
+        selectedOptions: state.boardsById[boardId].selectedOptions
     };
 };
 

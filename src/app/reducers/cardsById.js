@@ -1,9 +1,8 @@
 const cardsById = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CARD": {
-      const { listTitle, category, cardId } = action.payload;
-      console.log({ ...state, [cardId]: { _id: cardId, [category]:  listTitle, opened_at: new Date().toISOString() } })
-      return { ...state, [cardId]: { _id: cardId, [category]:  listTitle, opened_at: new Date().toISOString() } };
+      const { listTitle, category, cardId, opened_date } = action.payload;
+      return { ...state, [cardId]: { _id: cardId, [category]:  listTitle, opened_date: new Date(opened_date).toISOString() }};
     }
     case "CHANGE_CARD_CONTENT": {
       const { newContent, cardId } = action.payload;

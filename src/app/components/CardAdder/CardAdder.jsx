@@ -21,8 +21,13 @@ class CardAdder extends Component {
 
   toggleCardEditor = () => {
     const { listTitle, category, dispatch } = this.props;
-    const { card } = this.state;
-    card._id = shortid.generate();
+    var { card } = this.state;
+    card = {
+      _id: shortid.generate(),
+      opened_date: new Date().toISOString(),
+      [category]: listTitle
+    }
+    
     this.setState({ isOpen: !this.state.isOpen, card });
     if(!this.state.isOpen){
       dispatch({
@@ -30,7 +35,8 @@ class CardAdder extends Component {
         payload: {
           listTitle,
           category,
-          cardId: card._id
+          cardId: card._id,
+          opened_date: card.opened_date
         }
       });
     }

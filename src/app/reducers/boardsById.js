@@ -70,12 +70,12 @@ const boardsById = (state = {}, action) => {
       return restOfBoards;
     }
     case "PUT_BOARD_OPTIONS": {
-      const { boardId, options } = action.payload;
+      const { boardId, selectedOptions } = action.payload;
       return {
         ...state,
         [boardId]: {
           ...state[boardId],
-          options
+          selectedOptions
         }
       };
     }
