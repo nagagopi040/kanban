@@ -43,7 +43,7 @@ class BoardAdder extends Component {
     });
 
     const urlSlug = slugify(title, { lower: true });
-    history.push(`/b/${boardId}/${urlSlug}`);
+    history.push(`/${urlSlug}`);
 
     this.setState({ isOpen: false, title: "" });
   };

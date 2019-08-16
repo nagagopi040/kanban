@@ -8,7 +8,7 @@ const App = () => {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/b/:boardId" component={BoardContainer} />
+        <Route path="/:boardId" component={BoardContainer} />
         <Redirect to="/" />
       </Switch>
     );

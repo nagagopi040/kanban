@@ -25,7 +25,7 @@ class Home extends Component {
     const { boards, history } = this.props;
     return (
       <>
-        <Title>Home | React Kanban</Title>
+        <Title>Home | Kanban</Title>
         <Header />
         <div className="home">
           <div className="main-content">
@@ -36,7 +36,7 @@ class Home extends Component {
                   key={board._id}
                   className={classnames("board-link", board.color)}
                   to={{
-                    pathname: `/b/${board._id}/${slugify(board.title, {lower: true})}`,
+                    pathname: `/${board._id}`,
                     state: { boardId: board._id }
                   }}
                 >
